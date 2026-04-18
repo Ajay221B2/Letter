@@ -1,29 +1,37 @@
-/* --- Base Layout --- */
+/* 1. Reset and Center Everything */
 body {
-  background-color: #f0e6f6; /* Soft lavender */
   margin: 0;
-  overflow-x: hidden; /* Prevents side-scrolling due to the large width */
+  padding: 0;
+  background-color: #f0e6f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensures the page takes up the full screen height */
+  overflow-x: hidden;
 }
 
+/* 2. Adjust the Wrapper */
 .envlope-wrapper {
-  height: 1520px; /* 380 * 4 */
+  position: relative;
+  /* Removed fixed height to allow flexbox to center it */
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 100px;
+  align-items: center;
+  margin-bottom: 40px; /* Space for the buttons below */
 }
 
 #envelope {
   position: relative;
-  width: 1120px; /* 280 * 4 */
-  height: 720px; /* 180 * 4 */
+  width: 1120px; /* 4x scale */
+  height: 720px; /* 4x scale */
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
   background-color: #d9534f;
   box-shadow: 0 16px 80px rgba(0, 0, 0, 0.2);
+  top: 0; /* Removed the 150px top offset to prevent it from going off-page */
 }
 
-/* --- The Triangles (Flap & Pocket) --- */
 .front {
   position: absolute;
   width: 0;
@@ -32,10 +40,10 @@ body {
 }
 
 .flap {
-  border-left: 560px solid transparent;  /* Half of 1120 */
-  border-right: 560px solid transparent; /* Half of 1120 */
+  border-left: 560px solid transparent;
+  border-right: 560px solid transparent;
   border-bottom: 328px solid transparent;
-  border-top: 392px solid #d9534f;        /* 98 * 4 */
+  border-top: 392px solid #d9534f;
   transform-origin: top;
   pointer-events: none;
 }
@@ -43,13 +51,13 @@ body {
 .pocket {
   border-left: 560px solid #f5a3a2;
   border-right: 560px solid #f5a3a2;
-  border-bottom: 360px solid #ff6f61;      /* 90 * 4 */
+  border-bottom: 360px solid #ff6f61;
   border-top: 360px solid transparent;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
 }
 
-/* --- The Letter --- */
+/* 3. The Letter Positioning */
 .letter {
   position: relative;
   background-color: #fff;
@@ -76,16 +84,17 @@ body {
 
 .words.line1 {
   top: 10%;
-  font-size: 2.8rem; /* 0.7 * 4 */
+  font-size: 2.8rem;
   width: 30%;
   height: 10%;
 }
 
-.words.line2 { top: 30%; font-size: 4.4rem; }
-.words.line3 { top: 50%; font-size: 4.4rem; }
-.words.line4 { top: 70%; font-size: 4.4rem; }
+.words.line2, .words.line3, .words.line4 {
+  font-size: 4.4rem;
+  text-align: center;
+}
 
-/* --- Opening Logic --- */
+/* 4. Animation Logic */
 .open .flap {
   transform: rotateX(180deg);
   transition: transform 0.4s ease, z-index 0.6s;
@@ -105,15 +114,15 @@ body {
 }
 
 .open .letter {
-  transform: translateY(-500px); /* Increased to clear the 720px height */
+  transform: translateY(-500px); /* Slides the letter up */
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
   z-index: 2;
 }
 
-/* --- Giant Hearts --- */
+/* 5. Hearts */
 .hearts {
   position: absolute;
-  top: 360px; /* 90 * 4 */
+  top: 360px;
   left: 0;
   right: 0;
   z-index: 2;
@@ -122,6 +131,7 @@ body {
 .heart {
   position: absolute;
   bottom: 0;
+  right: 10%;
   pointer-events: none;
 }
 
@@ -129,10 +139,10 @@ body {
 .heart:after {
   position: absolute;
   content: "";
-  left: 200px; /* 50 * 4 */
+  left: 200px;
   top: 0;
-  width: 200px; /* 50 * 4 */
-  height: 320px; /* 80 * 4 */
+  width: 200px;
+  height: 320px;
   background: #e60073;
   border-radius: 200px 200px 0 0;
   transform: rotate(-45deg);
@@ -145,25 +155,12 @@ body {
   transform-origin: 100% 100%;
 }
 
-/* --- Updated Heart Animations --- */
-.a1 { left: 20%; transform: scale(0.6); animation: slideUp 4s linear infinite, sideSway 2s ease-in-out infinite alternate; animation-delay: 0.7s; }
-.a2 { left: 55%; transform: scale(1); animation: slideUp 5s linear infinite, sideSway 4s ease-in-out infinite alternate; animation-delay: 0.7s; }
-.a3 { left: 10%; transform: scale(0.8); animation: slideUp 7s linear infinite, sideSway 2s ease-in-out infinite alternate; animation-delay: 0.7s; }
-
-@keyframes slideUp {
-  0% { top: 0; opacity: 1; }
-  100% { top: -2000px; opacity: 0; }
-}
-
-@keyframes sideSway {
-  0% { margin-left: 0px; }
-  100% { margin-left: 200px; }
-}
-
-/* --- Giant Buttons --- */
+/* 6. Centering the CTA Buttons */
 .reset {
   text-align: center;
-  margin-top: 50px;
+  z-index: 10;
+  position: relative;
+  margin-top: 20px; /* Keeps them close to the envelope */
 }
 
 .reset button {
@@ -171,15 +168,27 @@ body {
   border: solid 4px #d9534f;
   border-radius: 12px;
   color: #d9534f;
-  font-size: 32px; /* 14px -> 32px approx */
+  font-size: 32px;
   padding: 20px 60px;
   margin: 10px;
   cursor: pointer;
   background: white;
   text-transform: uppercase;
+  transition: all 0.2s ease;
 }
 
 .reset button:hover {
   background-color: #d9534f;
   color: #fff;
+}
+
+/* Animation Keyframes */
+@keyframes slideUp {
+  0% { top: 0; }
+  100% { top: -1200px; }
+}
+
+@keyframes sideSway {
+  0% { margin-left: 0px; }
+  100% { margin-left: 50px; }
 }
