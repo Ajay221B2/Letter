@@ -248,3 +248,30 @@ body {
   opacity: 0;
   animation: none;
 }
+
+/* --- Mobile Responsive Fix --- */
+@media screen and (max-width: 768px) {
+  .envlope-wrapper {
+    /* Reduce the top padding so it fits on shorter phone screens */
+    padding-top: 300px; 
+    /* Use a scale transform to shrink the entire 1120px envelope to fit the phone width */
+    transform: scale(0.35); 
+    transform-origin: top center;
+  }
+
+  body {
+    /* Prevent the scaled-down envelope from creating extra empty scroll space */
+    justify-content: flex-start;
+  }
+
+  .reset {
+    /* Move buttons up so they are visible on the phone screen */
+    margin-top: -600px; 
+  }
+
+  .reset button {
+    /* Slightly smaller buttons for mobile fingers */
+    font-size: 24px;
+    padding: 15px 40px;
+  }
+}
