@@ -16,7 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 200px; /* Space for the letter to pop up */
+  margin-top: 300px; /* Space for letter to slide up */
   margin-bottom: 50px;
 }
 
@@ -63,39 +63,40 @@ body {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  height: 95%; /* Slightly taller to fit more text */
+  height: 95%; 
   top: 5%;
   border-radius: 12px;
   box-shadow: 0 8px 100px rgba(0, 0, 0, 0.12);
   font-family: "Dancing Script", cursive;
+  z-index: 1; /* Sits behind pocket when closed */
 }
 
 .words {
   position: absolute;
   left: 5%;
   width: 90%;
-  height: 12%;
-  background-color: #ffe6e6;
+  height: 10%;
+  background-color: #ffe6e6; /* Highlights for text lines */
   display: flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
 }
 
-/* Specific Line Positioning to prevent overlap */
-.words.line1 { top: 8%; font-size: 2.5rem; width: 30%; }
-.words.line2 { top: 24%; font-size: 2.4rem; }
-.words.line3 { top: 40%; font-size: 2.4rem; }
-.words.line4 { top: 56%; font-size: 2.4rem; }
+/* Precise Positioning for each line */
+.words.line1 { top: 10%; font-size: 2.8rem; width: 25%; } /* To: Preetu */
+.words.line2 { top: 28%; font-size: 2.5rem; } /* Sunflowers... */
+.words.line3 { top: 45%; font-size: 2.5rem; } /* Obsessed... */
+.words.line4 { top: 62%; font-size: 2.5rem; } /* You in white... */
 .words.line5 { 
-  top: 75%; 
+  top: 80%; 
   font-size: 2.2rem; 
   background-color: transparent; 
   justify-content: flex-end; 
-  padding-right: 40px; 
-}
+  padding-right: 50px; 
+} /* Your favourite chaos 🐾 */
 
-/* --- Animations --- */
+/* --- Opening Logic --- */
 .open .flap {
   transform: rotateX(180deg);
   transition: transform 0.4s ease, z-index 0.6s;
@@ -104,14 +105,14 @@ body {
 
 .close .flap {
   transform: rotateX(0deg);
-  transition: transform 0.4s 0.6s ease, z-index 1s;
+  transition: transform 0.4s 0.6s ease, z-index 5;
   z-index: 5;
 }
 
 .open .letter {
-  transform: translateY(-600px); /* Lifted higher for 5 lines */
+  transform: translateY(-650px); /* Massive slide up to show everything */
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
-  z-index: 2;
+  z-index: 4; /* Higher than pocket (z-index 3) when open */
 }
 
 .close .letter {
@@ -125,7 +126,7 @@ body {
   text-align: center;
   position: relative;
   z-index: 10;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .reset button {
@@ -139,6 +140,7 @@ body {
   cursor: pointer;
   background: white;
   text-transform: uppercase;
+  transition: 0.2s;
 }
 
 .reset button:hover {
@@ -146,7 +148,7 @@ body {
   color: #fff;
 }
 
-/* --- Giant Hearts --- */
+/* --- Hearts --- */
 .hearts {
   position: absolute;
   top: 360px;
