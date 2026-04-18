@@ -6,7 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Changed from center to allow scrolling if needed */
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -16,7 +16,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 300px; /* Space for letter to slide up */
+  /* Reduced margin-top and added padding to ensure the letter has room at the top */
+  padding-top: 500px; 
   margin-bottom: 50px;
 }
 
@@ -68,7 +69,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 100px rgba(0, 0, 0, 0.12);
   font-family: "Dancing Script", cursive;
-  z-index: 1; /* Sits behind pocket when closed */
+  z-index: 1;
 }
 
 .words {
@@ -76,7 +77,7 @@ body {
   left: 5%;
   width: 90%;
   height: 10%;
-  background-color: #ffe6e6; /* Highlights for text lines */
+  background-color: #ffe6e6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,17 +85,17 @@ body {
 }
 
 /* Precise Positioning for each line */
-.words.line1 { top: 10%; font-size: 2.8rem; width: 25%; } /* To: Preetu */
-.words.line2 { top: 28%; font-size: 2.5rem; } /* Sunflowers... */
-.words.line3 { top: 45%; font-size: 2.5rem; } /* Obsessed... */
-.words.line4 { top: 62%; font-size: 2.5rem; } /* You in white... */
+.words.line1 { top: 10%; font-size: 2.8rem; width: 25%; }
+.words.line2 { top: 28%; font-size: 2.5rem; }
+.words.line3 { top: 45%; font-size: 2.5rem; }
+.words.line4 { top: 62%; font-size: 2.5rem; }
 .words.line5 { 
   top: 80%; 
   font-size: 2.2rem; 
   background-color: transparent; 
   justify-content: flex-end; 
   padding-right: 50px; 
-} /* Your favourite chaos 🐾 */
+}
 
 /* --- Opening Logic --- */
 .open .flap {
@@ -110,9 +111,10 @@ body {
 }
 
 .open .letter {
-  transform: translateY(-350px); /* Massive slide up to show everything */
+  /* Adjusted translateY so it doesn't go off-screen but clears the pocket */
+  transform: translateY(-350px); 
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
-  z-index: 4; /* Higher than pocket (z-index 3) when open */
+  z-index: 4; 
 }
 
 .close .letter {
@@ -127,6 +129,7 @@ body {
   position: relative;
   z-index: 10;
   margin-top: 30px;
+  padding-bottom: 100px; /* Extra space at the bottom */
 }
 
 .reset button {
