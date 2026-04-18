@@ -152,23 +152,33 @@ body {
 }
 
 /* --- Hearts --- */
+/* --- Giant Hearts --- */
 .hearts {
   position: absolute;
-  top: 360px;
+  top: 90px;
   left: 0;
   right: 0;
   z-index: 2;
 }
 
-.heart:before, .heart:after {
+.heart {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  pointer-events: none;
+  opacity: 0; /* Hidden by default */
+}
+
+.heart:before,
+.heart:after {
   position: absolute;
   content: "";
-  left: 200px;
+  left: 50px;
   top: 0;
-  width: 200px;
-  height: 320px;
-  background: #e60073;
-  border-radius: 200px 200px 0 0;
+  width: 50px;
+  height: 80px;
+  background: #e60073; /* Deep romantic pink */
+  border-radius: 50px 50px 0 0;
   transform: rotate(-45deg);
   transform-origin: 0 100%;
 }
@@ -177,4 +187,64 @@ body {
   left: 0;
   transform: rotate(45deg);
   transform-origin: 100% 100%;
+}
+
+/* --- Heart Animation Trigger --- */
+/* Only animate when the envelope has the 'open' class */
+.open .heart {
+  opacity: 1;
+}
+
+.open .a1 {
+  left: 20%;
+  transform: scale(1.2);
+  animation: slideUp 4s linear infinite, sideSway 2s ease-in-out infinite alternate;
+  animation-delay: 0.7s;
+}
+
+.open .a2 {
+  left: 55%;
+  transform: scale(1.5);
+  animation: slideUp 5s linear infinite, sideSway 4s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
+
+.open .a3 {
+  left: 10%;
+  transform: scale(1.3);
+  animation: slideUp 7s linear infinite, sideSway 2s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+/* --- Keyframes --- */
+@keyframes slideUp {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: -800px;
+    opacity: 0;
+  }
+}
+
+@keyframes sideSway {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 100px;
+  }
+}
+
+/* Reset hearts when closed */
+.close .heart {
+  opacity: 0;
+  animation: none;
 }
