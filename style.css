@@ -1,24 +1,22 @@
-/* 1. Center everything on the screen */
+/* --- Base Layout --- */
 body {
   margin: 0;
   padding: 0;
-  background-color: #f0e6f6; /* Soft lavender */
+  background-color: #f0e6f6;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* Use the full height of the browser */
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* 2. Container for the envelope */
 .envlope-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Extra space for the letter when it pops UP */
-  margin-top: 250px; 
+  margin-top: 200px; /* Space for the letter to pop up */
   margin-bottom: 50px;
 }
 
@@ -28,11 +26,11 @@ body {
   height: 720px; /* 180 * 4 */
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
-  background-color: #d9534f; /* Warm romantic red */
+  background-color: #d9534f;
   box-shadow: 0 16px 80px rgba(0, 0, 0, 0.2);
 }
 
-/* 3. The Triangles (Flap & Pocket) */
+/* --- Triangles --- */
 .front {
   position: absolute;
   width: 0;
@@ -44,7 +42,7 @@ body {
   border-left: 560px solid transparent;
   border-right: 560px solid transparent;
   border-bottom: 328px solid transparent;
-  border-top: 392px solid #d9534f; /* 98 * 4 */
+  border-top: 392px solid #d9534f;
   transform-origin: top;
   pointer-events: none;
 }
@@ -52,20 +50,20 @@ body {
 .pocket {
   border-left: 560px solid #f5a3a2;
   border-right: 560px solid #f5a3a2;
-  border-bottom: 360px solid #ff6f61; /* 90 * 4 */
+  border-bottom: 360px solid #ff6f61;
   border-top: 360px solid transparent;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
 }
 
-/* 4. The Letter & Message */
+/* --- The Letter & 5-Line Message --- */
 .letter {
   position: relative;
   background-color: #fff;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  height: 90%;
+  height: 95%; /* Slightly taller to fit more text */
   top: 5%;
   border-radius: 12px;
   box-shadow: 0 8px 100px rgba(0, 0, 0, 0.12);
@@ -74,61 +72,30 @@ body {
 
 .words {
   position: absolute;
-  left: 10%;
-  width: 80%;
-  height: 14%;
-  background-color: #ffe6e6; /* Light romantic tone */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* --- Updated Message Styling for 5 Lines --- */
-
-.words {
-  position: absolute;
   left: 5%;
   width: 90%;
-  height: 10%; /* Slightly shorter height per line block */
-  background-color: #ffe6e6; 
+  height: 12%;
+  background-color: #ffe6e6;
   display: flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap; /* Prevents text from breaking into two lines */
+  white-space: nowrap;
 }
 
-/* Positioning each line specifically */
-.words.line1 {
-  top: 10%;
-  font-size: 2.2rem; 
-  width: 25%; /* Keeping "To: Preetu" smaller */
-}
-
-.words.line2 { 
-  top: 25%; 
-  font-size: 2.5rem; 
-}
-
-.words.line3 { 
-  top: 40%; 
-  font-size: 2.5rem; 
-}
-
-.words.line4 { 
-  top: 55%; 
-  font-size: 2.5rem; 
-}
-
-/* Added Line 5 and positioned it at the bottom */
+/* Specific Line Positioning to prevent overlap */
+.words.line1 { top: 8%; font-size: 2.5rem; width: 30%; }
+.words.line2 { top: 24%; font-size: 2.4rem; }
+.words.line3 { top: 40%; font-size: 2.4rem; }
+.words.line4 { top: 56%; font-size: 2.4rem; }
 .words.line5 { 
   top: 75%; 
-  font-size: 2.2rem;
-  background-color: transparent; /* Makes the sign-off look cleaner */
-  justify-content: flex-end; /* Aligns "Your favourite chaos" to the right */
-  padding-right: 20px;
+  font-size: 2.2rem; 
+  background-color: transparent; 
+  justify-content: flex-end; 
+  padding-right: 40px; 
 }
 
-/* 5. Opening Animation Logic */
+/* --- Animations --- */
 .open .flap {
   transform: rotateX(180deg);
   transition: transform 0.4s ease, z-index 0.6s;
@@ -141,9 +108,8 @@ body {
   z-index: 5;
 }
 
-/* --- Ensure the letter pops up high enough to see all 5 lines --- */
 .open .letter {
-  transform: translateY(-550px); /* Increased from -500px to show the full letter */
+  transform: translateY(-600px); /* Lifted higher for 5 lines */
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
   z-index: 2;
 }
@@ -154,7 +120,7 @@ body {
   z-index: 1;
 }
 
-/* 6. Centered Buttons (CTA) */
+/* --- CTA Buttons --- */
 .reset {
   text-align: center;
   position: relative;
@@ -167,13 +133,12 @@ body {
   border: solid 4px #d9534f;
   border-radius: 12px;
   color: #d9534f;
-  font-size: 32px; /* Large buttons for easy clicking */
+  font-size: 32px;
   padding: 20px 60px;
   margin: 10px;
   cursor: pointer;
   background: white;
   text-transform: uppercase;
-  transition: all 0.2s ease;
 }
 
 .reset button:hover {
@@ -181,26 +146,19 @@ body {
   color: #fff;
 }
 
-/* 7. Hearts Animation */
+/* --- Giant Hearts --- */
 .hearts {
   position: absolute;
-  top: 360px; /* 90 * 4 */
+  top: 360px;
   left: 0;
   right: 0;
   z-index: 2;
 }
 
-.heart {
-  position: absolute;
-  bottom: 0;
-  pointer-events: none;
-}
-
-.heart:before,
-.heart:after {
+.heart:before, .heart:after {
   position: absolute;
   content: "";
-  left: 200px; /* 50 * 4 */
+  left: 200px;
   top: 0;
   width: 200px;
   height: 320px;
@@ -214,9 +172,4 @@ body {
   left: 0;
   transform: rotate(45deg);
   transform-origin: 100% 100%;
-}
-
-@keyframes slideUp {
-  0% { top: 0; opacity: 1; }
-  100% { top: -1500px; opacity: 0; }
 }
