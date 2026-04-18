@@ -110,7 +110,7 @@ body {
 }
 
 .open .letter {
-  transform: translateY(-650px); /* Massive slide up to show everything */
+  transform: translateY(-350px); /* Massive slide up to show everything */
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
   z-index: 4; /* Higher than pocket (z-index 3) when open */
 }
