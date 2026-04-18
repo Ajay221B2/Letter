@@ -1,37 +1,38 @@
-/* 1. Reset and Center Everything */
+/* 1. Center everything on the screen */
 body {
   margin: 0;
   padding: 0;
-  background-color: #f0e6f6;
+  background-color: #f0e6f6; /* Soft lavender */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* Ensures the page takes up the full screen height */
+  min-height: 100vh; /* Use the full height of the browser */
   overflow-x: hidden;
 }
 
-/* 2. Adjust the Wrapper */
+/* 2. Container for the envelope */
 .envlope-wrapper {
   position: relative;
-  /* Removed fixed height to allow flexbox to center it */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px; /* Space for the buttons below */
+  /* Extra space for the letter when it pops UP */
+  margin-top: 250px; 
+  margin-bottom: 50px;
 }
 
 #envelope {
   position: relative;
-  width: 1120px; /* 4x scale */
-  height: 720px; /* 4x scale */
+  width: 1120px; /* 280 * 4 */
+  height: 720px; /* 180 * 4 */
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
-  background-color: #d9534f;
+  background-color: #d9534f; /* Warm romantic red */
   box-shadow: 0 16px 80px rgba(0, 0, 0, 0.2);
-  top: 0; /* Removed the 150px top offset to prevent it from going off-page */
 }
 
+/* 3. The Triangles (Flap & Pocket) */
 .front {
   position: absolute;
   width: 0;
@@ -43,7 +44,7 @@ body {
   border-left: 560px solid transparent;
   border-right: 560px solid transparent;
   border-bottom: 328px solid transparent;
-  border-top: 392px solid #d9534f;
+  border-top: 392px solid #d9534f; /* 98 * 4 */
   transform-origin: top;
   pointer-events: none;
 }
@@ -51,13 +52,13 @@ body {
 .pocket {
   border-left: 560px solid #f5a3a2;
   border-right: 560px solid #f5a3a2;
-  border-bottom: 360px solid #ff6f61;
+  border-bottom: 360px solid #ff6f61; /* 90 * 4 */
   border-top: 360px solid transparent;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
 }
 
-/* 3. The Letter Positioning */
+/* 4. The Letter & Message */
 .letter {
   position: relative;
   background-color: #fff;
@@ -76,7 +77,7 @@ body {
   left: 10%;
   width: 80%;
   height: 14%;
-  background-color: #ffe6e6;
+  background-color: #ffe6e6; /* Light romantic tone */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,17 +85,16 @@ body {
 
 .words.line1 {
   top: 10%;
-  font-size: 2.8rem;
+  font-size: 2.8rem; /* Scaled from 0.7 */
   width: 30%;
   height: 10%;
 }
 
-.words.line2, .words.line3, .words.line4 {
-  font-size: 4.4rem;
-  text-align: center;
-}
+.words.line2 { top: 30%; font-size: 4.4rem; text-align: center; }
+.words.line3 { top: 50%; font-size: 4.4rem; text-align: center; }
+.words.line4 { top: 70%; font-size: 4.4rem; text-align: center; }
 
-/* 4. Animation Logic */
+/* 5. Opening Animation Logic */
 .open .flap {
   transform: rotateX(180deg);
   transition: transform 0.4s ease, z-index 0.6s;
@@ -107,22 +107,49 @@ body {
   z-index: 5;
 }
 
+.open .letter {
+  transform: translateY(-500px); /* Lifts message high enough to read */
+  transition: transform 0.4s 0.6s ease, z-index 0.6s;
+  z-index: 2;
+}
+
 .close .letter {
   transform: translateY(0px);
   transition: transform 0.4s ease, z-index 1s;
   z-index: 1;
 }
 
-.open .letter {
-  transform: translateY(-500px); /* Slides the letter up */
-  transition: transform 0.4s 0.6s ease, z-index 0.6s;
-  z-index: 2;
+/* 6. Centered Buttons (CTA) */
+.reset {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  margin-top: 20px;
 }
 
-/* 5. Hearts */
+.reset button {
+  font-weight: 800;
+  border: solid 4px #d9534f;
+  border-radius: 12px;
+  color: #d9534f;
+  font-size: 32px; /* Large buttons for easy clicking */
+  padding: 20px 60px;
+  margin: 10px;
+  cursor: pointer;
+  background: white;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.reset button:hover {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+/* 7. Hearts Animation */
 .hearts {
   position: absolute;
-  top: 360px;
+  top: 360px; /* 90 * 4 */
   left: 0;
   right: 0;
   z-index: 2;
@@ -131,7 +158,6 @@ body {
 .heart {
   position: absolute;
   bottom: 0;
-  right: 10%;
   pointer-events: none;
 }
 
@@ -139,7 +165,7 @@ body {
 .heart:after {
   position: absolute;
   content: "";
-  left: 200px;
+  left: 200px; /* 50 * 4 */
   top: 0;
   width: 200px;
   height: 320px;
@@ -155,40 +181,7 @@ body {
   transform-origin: 100% 100%;
 }
 
-/* 6. Centering the CTA Buttons */
-.reset {
-  text-align: center;
-  z-index: 10;
-  position: relative;
-  margin-top: 20px; /* Keeps them close to the envelope */
-}
-
-.reset button {
-  font-weight: 800;
-  border: solid 4px #d9534f;
-  border-radius: 12px;
-  color: #d9534f;
-  font-size: 32px;
-  padding: 20px 60px;
-  margin: 10px;
-  cursor: pointer;
-  background: white;
-  text-transform: uppercase;
-  transition: all 0.2s ease;
-}
-
-.reset button:hover {
-  background-color: #d9534f;
-  color: #fff;
-}
-
-/* Animation Keyframes */
 @keyframes slideUp {
-  0% { top: 0; }
-  100% { top: -1200px; }
-}
-
-@keyframes sideSway {
-  0% { margin-left: 0px; }
-  100% { margin-left: 50px; }
+  0% { top: 0; opacity: 1; }
+  100% { top: -1500px; opacity: 0; }
 }
